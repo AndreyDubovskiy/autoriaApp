@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def my_page
-    render 'reg'
+    render 'pages'
   end
 
 

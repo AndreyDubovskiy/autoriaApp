@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/statuses/edit', to: 'statuses#editPage'
   post '/statuses/edit', to: 'statuses#edit'
   delete '/statuses/delete', to: 'statuses#delete'
+  get '/', to: 'pages#my_page'
 end
