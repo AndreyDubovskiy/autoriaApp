@@ -13,12 +13,17 @@ a {
     background-color: black;
     padding: 10px;
     border: none;
+    font-size: 25px;
 }
-
+.pole{
+    background-color: black;
+    color: green; /* сохраняем зеленый цвет для текста */
+    text-align: center;
+}
 .header a {
     color: green;
     text-decoration: none;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 
 .header a:hover {
@@ -60,7 +65,22 @@ a {
     border-radius: 7px;
     outline: none; /* Добавлено для удаления ободка */
 }
+
 .content button[type="submit"]:hover {
+    background-color: #2a2a2a;
+    color: #00ff00;
+}
+.content input[type="submit"]  {
+    background-color:black;
+    color: green;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 7px;
+    outline: none; /* Добавлено для удаления ободка */
+}
+.content input[type="submit"]:hover {
     background-color: #2a2a2a;
     color: #00ff00;
 }
@@ -70,7 +90,7 @@ a {
 }
 
 .search-wrapper input[type="text"] {
-    padding-right: 50зx; /* Увеличьте это значение, чтобы устранить перекрытие с крестиком */
+    padding-right: 50px; /* Увеличьте это значение, чтобы устранить перекрытие с крестиком */
 }
 
 .clear-input {
@@ -85,4 +105,22 @@ a {
 
 .search-wrapper:hover .clear-input {
     display: block;
+}
+
+table {
+    background-color: black;
+    color: green;
+    margin: 0 auto; /* центрируем таблицу по горизонтали */
+    border-collapse: collapse; /* объединяем границы ячеек */
+    width: 100%; /* устанавливаем ширину таблицы */
+}
+
+th, td {
+    padding: 8px; /* устанавливаем отступы в ячейках */
+    text-align: left; /* выравниваем текст по левому краю */
+    border-bottom: 3px solid rgba(52, 52, 52, 0.66); /* добавляем полоски между ячейками */
+    border-right: 3px solid rgba(52, 52, 52, 0.66); /* добавляем вертикальную полосу после каждой колонки */
+    border-left: 3px solid rgba(52, 52, 52, 0.66);
+    border-top: 3px solid rgba(52, 52, 52, 0.66);
+    border-color: #2a2a2a;
 }
