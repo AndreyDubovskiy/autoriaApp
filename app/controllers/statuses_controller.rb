@@ -7,7 +7,7 @@ class StatusesController < ApplicationController
     else
       @statuses = Status.all
     end
-    render 'all_statuses'
+    render 'all'
   end
 
   #GET
@@ -25,6 +25,7 @@ class StatusesController < ApplicationController
 
   #GET
   def editPage
+    @tmp = Status.find(params[:id])
     render 'edit'
   end
 
