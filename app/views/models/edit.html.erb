@@ -2,8 +2,13 @@
 <h1>Edit</h1>
 
 
-    <%= form_tag statuses_edit_path+"?id="+@tmp.id.to_s do %>
-        <input type="text" name="name" placeholder="Назва">
+    <%= form_tag models_edit_path+"?id="+@tmp.id.to_s do %>
+    <select name="marka_auto_id">
+      <% @markas.each do |marka| %>
+        <option value="<%= marka.id %>" <%= 'selected' if marka.id == @tmp.marka_auto_id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <input type="text" name="name" placeholder="Назва" value="<%= @tmp.model %>">
         <%= submit_tag 'Зберегти', class: "content"%>
     <% end %>
 

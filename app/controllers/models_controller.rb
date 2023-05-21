@@ -20,7 +20,7 @@ class ModelsController < ApplicationController
   #POST
   def create
     @new = ModelMarkaAuto.new()
-    @new.name = params[:name]
+    @new.model = params[:name]
     @new.marka_auto_id = params[:marka_auto_id]
     @new.save
     redirect_to models_path
@@ -37,7 +37,7 @@ class ModelsController < ApplicationController
   def edit
     @tmp = ModelMarkaAuto.find(params[:id])
     if @tmp
-      @tmp.name = params[:name]
+      @tmp.model = params[:name]
       @tmp.marka_auto_id = params[:marka_auto_id]
       @tmp.save
     end

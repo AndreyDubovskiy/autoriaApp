@@ -1,4 +1,4 @@
-<h1>all </h1>
+<h1>all модели </h1>
 <table>
   <thead>
   <tr>
@@ -10,15 +10,15 @@
   </thead>
 
   <tbody>
-  <% @statuses.each do |status| %>
+  <% @models.each do |model| %>
     <tr>
-      <td><%= status.id %></td>
-      <td><%= status.name %></td>
-      <td><%= link_to 'редактировать', statuses_edit_path+"?id="+status.id.to_s %></td>
-      <td><%= link_to 'удалить',statuses_delete_path+"?id="+status.id.to_s, method: :delete, data: { turbo_method: "delete" } %></td>
+      <td><%= model.id %></td>
+      <td><%= model.model %></td>
+      <td><%= link_to 'Редагувати', models_edit_path+"?id="+model.id.to_s , class: "link2"%></td>
+      <td><%= link_to 'Видалити',models_delete_path+"?id="+model.id.to_s, method: :delete, data: { turbo_method: "delete" }, class: "link2" %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
-<%= link_to "New status", statuses_new_path %>
+<%= link_to "Нова модель", models_new_path, class: "link" %>

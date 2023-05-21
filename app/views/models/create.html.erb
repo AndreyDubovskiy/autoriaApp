@@ -2,7 +2,12 @@
   <h1>New @status</h1>
 
 
-  <%= form_tag  statuses_new_path do %>
+  <%= form_tag  models_new_path do %>
+    <select name="marka_auto_id">
+      <% @markas.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
     <input type="text" name="name" placeholder="Назва">
     <%= submit_tag 'Зберегти', class: "content"%>
   <% end %>
