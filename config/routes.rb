@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
 
   #
+  get '/', to: 'pages#my_page'
 end

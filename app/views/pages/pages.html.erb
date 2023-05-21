@@ -1,0 +1,19 @@
+<div class="content">
+  <h1>Поиск</h1>
+  <form>
+    <div class="search-wrapper">
+      <input type="text" name="search" placeholder="Введите запрос">
+      <span class="clear-input" onclick="clearSearchInput()">&times;</span>
+    </div>
+    <button type="submit">Знайти</button>
+  </form>
+  <script>
+      function clearSearchInput() {
+          var searchInput = document.querySelector('input[name="search"]');
+          searchInput.value = '';
+      }
+  </script>
+
+</div>
+
+
