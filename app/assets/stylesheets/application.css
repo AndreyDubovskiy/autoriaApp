@@ -29,6 +29,22 @@ a {
 .header a:hover {
     color: #00ff00; /* Замените на желаемый цвет при наведении */
 }
+
+.link{
+    color: green;
+    text-decoration: none;
+    font-size: 35px;
+}
+.link:hover{
+    color: #00ff00;
+}
+.link2{
+    color: green;
+    text-decoration: none;
+}
+.link2:hover{
+    color: #00ff00;
+}
 .content {
     margin-top: 20px;
     text-align: center;
