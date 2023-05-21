@@ -1,0 +1,24 @@
+<h1>all </h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @markas.each do |status| %>
+    <tr>
+      <td><%= status.id %></td>
+      <td><%= status.name %></td>
+      <td><%= link_to 'редактировать', statuses_edit_path+"?id="+status.id.to_s %></td>
+      <td><%= link_to 'удалить',statuses_delete_path+"?id="+status.id.to_s, method: :delete, data: { turbo_method: "delete" } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New status", statuses_new_path %>

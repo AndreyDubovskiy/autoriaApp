@@ -7,6 +7,7 @@ class CitiesController < ApplicationController
     else
       @cities = City.all
     end
+    @cities.page(params[:page]).per(10)
     render 'all'
   end
 
@@ -20,11 +21,12 @@ class CitiesController < ApplicationController
     @new = City.new()
     @new.name = params[:name]
     @new.save
-    redirect_to statuses_path
+    redirect_to cities_path
   end
 
   #GET
   def editPage
+    @tmp = City.find(params[:id])
     render 'edit'
   end
 
@@ -35,7 +37,7 @@ class CitiesController < ApplicationController
       @tmp.name = params[:name]
       @tmp.save
     end
-    redirect_to statuses_path
+    redirect_to cities_path
   end
 
   #DELETE
@@ -44,6 +46,6 @@ class CitiesController < ApplicationController
     if @tmp
       @tmp.delete
     end
-    redirect_to statuses_path
+    redirect_to cities_path
   end
 end

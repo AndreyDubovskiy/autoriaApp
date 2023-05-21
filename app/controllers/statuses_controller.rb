@@ -7,6 +7,7 @@ class StatusesController < ApplicationController
     else
       @statuses = Status.all
     end
+    @statuses.page(params[:page]).per(10)
     render 'all'
   end
 

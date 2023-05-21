@@ -15,6 +15,40 @@ Rails.application.routes.draw do
   delete '/statuses/delete', to: 'statuses#delete'
 
 
-  #
+  # CitiesController
+  get '/cities', to: 'cities#allCities'
+  get '/cities/new', to: 'cities#createPage'
+  post '/cities/new', to: 'cities#create'
+  get '/cities/edit', to: 'cities#editPage'
+  post '/cities/edit', to: 'cities#edit'
+  delete '/cities/delete', to: 'cities#delete'
+
+
+  # ColorsController
+  get '/colors', to: 'colors#allColors'
+  get '/colors/new', to: 'colors#createPage'
+  post '/colors/new', to: 'colors#create'
+  get '/colors/edit', to: 'colors#editPage'
+  post '/colors/edit', to: 'colors#edit'
+  delete '/colors/delete', to: 'colors#delete'
+
+  # MarkasController
+  get '/markas', to: 'markas#allMarkas'
+  get '/markas/new', to: 'markas#createPage'
+  post '/markas/new', to: 'markas#create'
+  get '/markas/edit', to: 'markas#editPage'
+  post '/markas/edit', to: 'markas#edit'
+  delete '/markas/delete', to: 'markas#delete'
+
+
+  # ModelsController
+  get '/models', to: 'models#allModels'
+  get '/models/new', to: 'models#createPage'
+  post '/models/new', to: 'models#create'
+  get '/models/edit', to: 'models#editPage'
+  post '/models/edit', to: 'models#edit'
+  delete '/models/delete', to: 'models#delete'
+
+
   get '/', to: 'pages#my_page'
 end
