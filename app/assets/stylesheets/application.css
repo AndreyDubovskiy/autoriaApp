@@ -64,3 +64,25 @@ a {
     background-color: #2a2a2a;
     color: #00ff00;
 }
+.search-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.search-wrapper input[type="text"] {
+    padding-right: 50зx; /* Увеличьте это значение, чтобы устранить перекрытие с крестиком */
+}
+
+.clear-input {
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    display: none;
+    font-size: 45px;
+}
+
+.search-wrapper:hover .clear-input {
+    display: block;
+}
