@@ -140,7 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_090658) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "type_autos", force: :cascade do |t|
+  create_table "auto_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -212,7 +212,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_090658) do
   add_foreign_key "autos", "colors"
   add_foreign_key "autos", "countries"
   add_foreign_key "autos", "model_marka_autos"
-  add_foreign_key "autos", "type_autos"
+  add_foreign_key "autos", "auto_types"
   add_foreign_key "autos", "type_drive_autos"
   add_foreign_key "autos", "type_fuels"
   add_foreign_key "autos", "type_kuzovs"

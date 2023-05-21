@@ -57,13 +57,13 @@ Rails.application.routes.draw do
   post '/countries/edit', to: 'countries#edit'
   delete '/countries/delete', to: 'countries#delete'
 
-  # TypeAutosController
-  get '/typeautos', to: 'TypeAutos#allTypeAutos'
-  get '/typeautos/new', to: 'TypeAutos#createPage'
-  post '/typeautos/new', to: 'TypeAutos#create'
-  get '/typeautos/edit', to: 'TypeAutos#editPage'
-  post '/typeautos/edit', to: 'TypeAutos#edit'
-  delete '/typeautos/delete', to: 'TypeAutos#delete'
+  # AutoTypesController
+  get '/autotypes', to: 'AutoTypes#allTypeAutos'
+  get '/autotypes/new', to: 'AutoTypes#createPage'
+  post '/autotypes/new', to: 'AutoTypes#create'
+  get '/autotypes/edit', to: 'AutoTypes#editPage'
+  post '/autotypes/edit', to: 'AutoTypes#edit'
+  delete '/autotypes/delete', to: 'AutoTypes#delete'
 
   # TypeDriveAutosController
   get '/typedriveauto', to: 'TypeDriveAutos#allTypeDriveAutos'

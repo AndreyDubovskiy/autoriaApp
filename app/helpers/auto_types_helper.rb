@@ -1,0 +1,2 @@
+module AutoTypesHelper
+end
