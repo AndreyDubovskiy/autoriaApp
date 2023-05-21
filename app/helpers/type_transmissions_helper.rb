@@ -1,0 +1,2 @@
+module TypeTransmissionsHelper
+end
