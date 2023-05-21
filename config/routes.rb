@@ -4,10 +4,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+
+  # StatusesController
   get '/statuses', to: 'statuses#allStatuses'
   get '/statuses/new', to: 'statuses#createPage'
   post '/statuses/new', to: 'statuses#create'
   get '/statuses/edit', to: 'statuses#editPage'
   post '/statuses/edit', to: 'statuses#edit'
   delete '/statuses/delete', to: 'statuses#delete'
+
+
+  #
 end
