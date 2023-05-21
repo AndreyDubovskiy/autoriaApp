@@ -23,7 +23,7 @@ class ModelsController < ApplicationController
     @new.name = params[:name]
     @new.marka_auto_id = params[:marka_auto_id]
     @new.save
-    redirect_to markas_path
+    redirect_to models_path
   end
 
   #GET
@@ -41,7 +41,7 @@ class ModelsController < ApplicationController
       @tmp.marka_auto_id = params[:marka_auto_id]
       @tmp.save
     end
-    redirect_to markas_path
+    redirect_to models_path
   end
 
   #DELETE
@@ -50,7 +50,7 @@ class ModelsController < ApplicationController
     if @tmp
       @tmp.delete
     end
-    redirect_to markas_path
+    redirect_to models_path
   end
 
 end
