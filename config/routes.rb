@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  devise_for :user_logins, controllers: {
+    sessions: 'user_logins/sessions'
+  }
 
   # StatusesController
   get '/statuses', to: 'statuses#allStatuses'

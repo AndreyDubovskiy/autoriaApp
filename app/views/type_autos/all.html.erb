@@ -1,0 +1,25 @@
+<h1>all </h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @typeAutos.each do |typeAuto| %>
+    <tr>
+      <td><%= typeAuto.id %></td>
+      <td><%= typeAuto.name %></td>
+      <td><%= link_to 'Редагувати', type_autos_edit_path+"?id="+typeAuto.id.to_s, class: "link2" %></td>
+      <td><%= link_to 'Видалити',type_autos_delete_path+"?id="+typeAuto.id.to_s, method: :delete, data: { turbo_method: "delete" }, class: "link2" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to "Новий статус", type_autos_new_path, class: "link" %>

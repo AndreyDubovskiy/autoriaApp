@@ -3,7 +3,7 @@
 
 
     <%= form_tag colors_edit_path+"?id="+@tmp.id.to_s do %>
-        <input type="text" name="name" placeholder="Назва">
+    <input type="text" name="name" placeholder="Назва" value="<%= @tmp.name %>>">
         <%= submit_tag 'Зберегти', class: "content"%>
     <% end %>
 
