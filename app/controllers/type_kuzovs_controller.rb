@@ -21,7 +21,7 @@ class TypeKuzovsController < ApplicationController
     @new = TypeKuzov.new()
     @new.name = params[:name]
     @new.save
-    redirect_to typekuzovs_path
+    redirect_to type_kuzovs_path
   end
 
   #GET
@@ -37,7 +37,7 @@ class TypeKuzovsController < ApplicationController
       @tmp.name = params[:name]
       @tmp.save
     end
-    redirect_to typekuzovs_path
+    redirect_to type_kuzovs_path
   end
 
   #DELETE
@@ -46,7 +46,7 @@ class TypeKuzovsController < ApplicationController
     if @tmp
       @tmp.delete
     end
-    redirect_to typekuzovs_path
+    redirect_to type_kuzovs_path
   end
 
 end

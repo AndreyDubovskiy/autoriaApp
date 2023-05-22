@@ -22,7 +22,7 @@ class TypeDriveAutosController < ApplicationController
     @new = TypeDriveAuto.new()
     @new.name = params[:name]
     @new.save
-    redirect_to typedriveauto_path
+    redirect_to type_drive_autos_path
   end
 
   #GET
@@ -38,7 +38,7 @@ class TypeDriveAutosController < ApplicationController
       @tmp.name = params[:name]
       @tmp.save
     end
-    redirect_to typedriveauto_path
+    redirect_to type_drive_autos_path
   end
 
   #DELETE
@@ -47,7 +47,7 @@ class TypeDriveAutosController < ApplicationController
     if @tmp
       @tmp.delete
     end
-    redirect_to typedriveauto_path
+    redirect_to type_drive_autos_path
   end
 
 end

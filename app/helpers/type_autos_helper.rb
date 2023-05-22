@@ -1,0 +1,2 @@
+module TypeAutosHelper
+end

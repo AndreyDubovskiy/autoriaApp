@@ -21,7 +21,7 @@ class TypeFuelsController < ApplicationController
     @new = TypeFuel.new()
     @new.name = params[:name]
     @new.save
-    redirect_to typefuels_path
+    redirect_to type_fuels_path
   end
 
   #GET
@@ -37,7 +37,7 @@ class TypeFuelsController < ApplicationController
       @tmp.name = params[:name]
       @tmp.save
     end
-    redirect_to typefuels_path
+    redirect_to type_fuels_path
   end
 
   #DELETE
@@ -46,7 +46,7 @@ class TypeFuelsController < ApplicationController
     if @tmp
       @tmp.delete
     end
-    redirect_to typefuels_path
+    redirect_to type_fuels_path
   end
 
 end

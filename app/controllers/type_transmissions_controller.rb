@@ -21,7 +21,7 @@ class TypeTransmissionsController < ApplicationController
     @new = TypeTransmission.new()
     @new.name = params[:name]
     @new.save
-    redirect_to typetransmissions_path
+    redirect_to type_transmissions_path
   end
 
   #GET
@@ -37,7 +37,7 @@ class TypeTransmissionsController < ApplicationController
       @tmp.name = params[:name]
       @tmp.save
     end
-    redirect_to typetransmissions_path
+    redirect_to type_transmissions_path
   end
 
   #DELETE
@@ -46,7 +46,7 @@ class TypeTransmissionsController < ApplicationController
     if @tmp
       @tmp.delete
     end
-    redirect_to typetransmissions_path
+    redirect_to type_transmissions_path
   end
 
 end

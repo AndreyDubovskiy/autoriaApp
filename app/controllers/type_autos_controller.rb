@@ -1,4 +1,4 @@
-class AutoTypesController < ApplicationController
+class TypeAutosController < ApplicationController
 
   #GET
   def allTypeAutos
@@ -7,7 +7,7 @@ class AutoTypesController < ApplicationController
     else
       @typeAutos = TypeAuto.all
     end
-    @typeAutos.page(params[:page]).per(10)
+    @typeAutos = @typeAutos.page(params[:page]).per(10)
     render 'all'
   end
 
@@ -21,7 +21,7 @@ class AutoTypesController < ApplicationController
     @new = TypeAuto.new()
     @new.name = params[:name]
     @new.save
-    redirect_to autotypes_path
+    redirect_to type_autos_path
   end
 
   #GET
@@ -37,7 +37,7 @@ class AutoTypesController < ApplicationController
       @tmp.name = params[:name]
       @tmp.save
     end
-    redirect_to autotypes_path
+    redirect_to type_autos_path
   end
 
   #DELETE
@@ -46,7 +46,7 @@ class AutoTypesController < ApplicationController
     if @tmp
       @tmp.delete
     end
-    redirect_to autotypes_path
+    redirect_to type_autos_path
   end
 
 end
