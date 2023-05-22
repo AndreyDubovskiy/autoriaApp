@@ -1,7 +1,7 @@
 class ColorsController < ApplicationController
 
   #GET
-  def allStatuses
+  def allColors
     if params.has_key? 'name'
       @colors = Color.where("name LIKE '%#{params[:name]}%'")
     else

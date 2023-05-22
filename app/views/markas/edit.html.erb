@@ -1,9 +1,9 @@
 <div class="content">
-<h1>Edit</h1>
+<h1>Редагувати</h1>
 
 
     <%= form_tag markas_edit_path+"?id="+@tmp.id.to_s do %>
-    <input type="text" name="name" placeholder="Назва" value="<%= @tmp.name %>>">
+    <input type="text" name="name" placeholder="Назва" value="<%= @tmp.name %>">
         <%= submit_tag 'Зберегти', class: "content"%>
     <% end %>
 

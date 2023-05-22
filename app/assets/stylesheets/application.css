@@ -166,3 +166,30 @@ select:focus {
     background-color: #2a2a2a;
     color: #00ff00;
 }
+.styled-input {
+    width: 250px;
+    background-color: #0c0c0c;
+    color: green;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 7px;
+    outline: none; /* Добавлено для удаления ободка */
+}
+
+.styled-button {
+    background-color: black;
+    color: green;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 7px;
+    outline: none; /* Добавлено для удаления ободка */
+}
+
+.styled-button:hover {
+    background-color: #2a2a2a;
+    color: #00ff00;
+}
