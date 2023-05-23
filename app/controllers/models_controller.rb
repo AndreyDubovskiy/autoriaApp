@@ -1,5 +1,5 @@
 class ModelsController < ApplicationController
-
+  before_action :authenticate_user_login!
   #GET
   def allModels
     if params.has_key? 'model'

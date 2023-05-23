@@ -1,5 +1,5 @@
 class ColorsController < ApplicationController
-
+  before_action :authenticate_user_login!
   #GET
   def allColors
     if params.has_key? 'name'

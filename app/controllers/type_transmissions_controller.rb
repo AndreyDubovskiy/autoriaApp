@@ -1,5 +1,5 @@
 class TypeTransmissionsController < ApplicationController
-
+  before_action :authenticate_user_login!
   #GET
   def allTypeTransmissions
     if params.has_key? 'name'

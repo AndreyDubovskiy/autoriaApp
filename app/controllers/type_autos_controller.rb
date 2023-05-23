@@ -1,5 +1,5 @@
 class TypeAutosController < ApplicationController
-
+  before_action :authenticate_user_login!
   #GET
   def allTypeAutos
     if params.has_key? 'name'

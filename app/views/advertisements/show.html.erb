@@ -1,0 +1,23 @@
+<%= image_tag @tmp.photos.first.file %><br>
+<h1><%= @tmp.title %></h1><br>
+<p>Ціна: <%= @tmp.price_data.last.price.count %></p><p><%= @tmp.price_data.last.price.valute.name %></p><br>
+<p>Місто: <%= @tmp.city.name %></p><br>
+<p>Марка: <%= @tmp.auto.model_marka_auto.marka_auto.name %></p><br>
+<p>Модель: <%= @tmp.auto.model_marka_auto.model %></p><br>
+<p>Нове: <%= @tmp.auto.is_new %></p><br>
+<p>Тип авто: <%= @tmp.auto.type_auto.name %></p><br>
+<p>Рік випуску: <%= @tmp.auto.year %></p><br>
+<p>Кузов: <%= @tmp.auto.type_kuzov.name %></p><br>
+<p>Країна виробник: <%= @tmp.auto.country.name %></p><br>
+<p>Колір: <%= @tmp.auto.color.name %></p><br>
+<p>Тип палива: <%= @tmp.auto.type_fuel.name %></p><br>
+<p>Коробка передач: <%= @tmp.auto.type_transmission.name %></p><br>
+<p>Привід: <%= @tmp.auto.type_drive_auto.name %></p><br>
+<p>Пробіг: <%= @tmp.auto.mileage %></p><br>
+
+
+<p>Текст об'яви: <%= @tmp.text %></p><br>
+
+<p>Продавець: <%= @tmp.user.surname + " " + @tmp.user.name + " " + @tmp.user.pobatkovi %></p><br>
+<p>Телефон: <%= @tmp.user.phone %></p><br>
+<a href="<%= advertisements_edit_path(id: @tmp.id) %>">Змінити</a><br>

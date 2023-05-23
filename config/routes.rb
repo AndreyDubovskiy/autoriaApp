@@ -6,8 +6,23 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   devise_for :user_logins, controllers: {
-    sessions: 'user_logins/sessions'
+    registrations: 'user_logins/registrations'
   }
+
+  # UsersController
+  get '/users/show', to: 'users#show'
+  get '/users/edit', to: 'users#editPage'
+  post '/users/edit', to: 'users#edit'
+  delete '/users/delete', to: 'users#delete'
+
+  # AdvertisementsController
+  get '/advertisements', to: 'advertisements#allAdvertisements'
+  get '/advertisements/show', to: 'advertisements#show'
+  get '/advertisements/new', to: 'advertisements#createPage'
+  post '/advertisements/new', to: 'advertisements#create'
+  get '/advertisements/edit', to: 'advertisements#editPage'
+  post '/advertisements/edit', to: 'advertisements#edit'
+  delete '/advertisements/delete', to: 'advertisements#delete'
 
   # StatusesController
   get '/statuses', to: 'statuses#allStatuses'

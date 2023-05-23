@@ -1,5 +1,5 @@
 class ValutesController < ApplicationController
-
+  before_action :authenticate_user_login!
 
   #GET
   def allValutes

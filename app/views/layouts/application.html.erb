@@ -10,8 +10,11 @@
     <%= javascript_importmap_tags %>
     <div class="header">
       <a href="/">Головна</a>
-      <a href= "#">Увійти</a>
-      <a href="#">Мій акаунт</a>
+      <a href="<%= advertisements_path %>">Об'яви</a>
+      <a href="<%= advertisements_new_path %>">newОб'явa</a>
+      <%= link_to 'Вийти', destroy_user_login_session_path, method: :delete, data: { turbo_method: "delete" }, class: "link2" %>
+      <a href= "<%= "#" %>">Увійти</a>
+      <a href="<%= users_show_path %>">Мій акаунт</a>
     </div>
     <div class="header">
       <a href= "<%=statuses_path %>">all statuses</a>

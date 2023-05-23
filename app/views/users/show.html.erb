@@ -1,0 +1,6 @@
+<p><%= @tmp.name %></p><br>
+<p><%= @tmp.surname %></p><br>
+<p><%= @tmp.pobatkovi %></p><br>
+<p><%= @tmp.phone %></p><br>
+<p><%= @tmp.city.name %></p><br>
+<%= link_to "Змінити", users_edit_path(id: @tmp.id) %>

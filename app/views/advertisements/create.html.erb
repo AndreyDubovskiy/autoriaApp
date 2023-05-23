@@ -1,9 +1,65 @@
 <div class="content">
-  <h1>New @status</h1>
+  <h1>New Adv</h1>
 
 
-  <%= form_tag  cities_new_path do %>
-    <input type="text" name="name" placeholder="Назва">
+  <%= form_tag  advertisements_new_path, multipart: true do %>
+    <input type="text" name="title" placeholder="title"><br>
+    <input type="text" name="text" placeholder="text"><br>
+    <%= check_box_tag :is_new, 'is_new', false %><br>
+    <input type="number" name="year" placeholder="year"><br>
+    <input type="number" name="miliage" placeholder="miliage"><br>
+    <select name="type_auto_id">
+      <% TypeAuto.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <select name="model_marka_auto_id">
+      <% ModelMarkaAuto.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.marka_auto.name+" "+marka.model %></option>
+      <% end %>
+    </select>
+    <select name="type_kuzov_id">
+      <% TypeKuzov.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <select name="country_id">
+      <% Country.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <select name="color_id">
+      <% Color.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <select name="type_fuel_id">
+      <% TypeFuel.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <select name="type_transmission_id">
+      <% TypeTransmission.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <select name="type_drive_auto_id">
+      <% TypeDriveAuto.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <select name="valute_id">
+      <% Valute.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <input type="number" name="count" placeholder="miliage"><br>
+    <%= file_field_tag :file %>
+    <select name="city_id">
+      <% City.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
     <%= submit_tag 'Зберегти', class: "content"%>
   <% end %>
 

@@ -1,5 +1,5 @@
 class TypeDriveAutosController < ApplicationController
-
+  before_action :authenticate_user_login!
 
   #GET
   def allTypeDriveAutos

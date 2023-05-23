@@ -1,5 +1,5 @@
 class TypeKuzovsController < ApplicationController
-
+  before_action :authenticate_user_login!
   #GET
   def allTypeKuzovs
     if params.has_key? 'name'

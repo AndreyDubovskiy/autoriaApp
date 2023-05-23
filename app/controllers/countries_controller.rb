@@ -1,5 +1,5 @@
 class CountriesController < ApplicationController
-
+  before_action :authenticate_user_login!
   #GET
   def allCountries
     if params.has_key? 'name'

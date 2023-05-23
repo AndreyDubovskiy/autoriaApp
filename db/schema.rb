@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_21_090658) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_22_205736) do
   create_table "active_storage_attachments", charset: "cp1251", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,6 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_090658) do
     t.bigint "type_drive_auto_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "advertisement_id", null: false
+    t.index ["advertisement_id"], name: "index_autos_on_advertisement_id"
     t.index ["color_id"], name: "index_autos_on_color_id"
     t.index ["country_id"], name: "index_autos_on_country_id"
     t.index ["model_marka_auto_id"], name: "index_autos_on_model_marka_auto_id"
@@ -109,7 +111,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_090658) do
   end
 
   create_table "photos", charset: "cp1251", force: :cascade do |t|
-    t.string "name"
     t.bigint "advertisement_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -209,6 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_090658) do
   add_foreign_key "advertisements", "autos"
   add_foreign_key "advertisements", "cities"
   add_foreign_key "advertisements", "users"
+  add_foreign_key "autos", "advertisements"
   add_foreign_key "autos", "colors"
   add_foreign_key "autos", "countries"
   add_foreign_key "autos", "model_marka_autos"

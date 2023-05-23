@@ -1,5 +1,5 @@
 class TypeFuelsController < ApplicationController
-
+  before_action :authenticate_user_login!
   #GET
   def allTypeFuels
     if params.has_key? 'name'

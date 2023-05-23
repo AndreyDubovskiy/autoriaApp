@@ -1,4 +1,5 @@
 <div class="content">
+
   <h1>Поиск</h1>
   <form>
     <div class="search-wrapper">
@@ -7,6 +8,7 @@
     </div>
     <button type="submit">Знайти</button>
   </form>
+
   <script>
       function clearSearchInput() {
           var searchInput = document.querySelector('input[name="search"]');
@@ -14,10 +16,15 @@
       }
   </script>
   <% @advs.each do |adv| %>
-    <div class="adv-block">
-
-    </div>
+    <div class="cool-block">
+      <%= image_tag adv.photos.first.file %><br>
+      <a href="<%= advertisements_show_path+"?id="+adv.id.to_s %>"><%= adv.title %></a><br>
+      <p><%= adv.price_data.last.price.count.to_s + " " + adv.price_data.last.price.valute.name %> </p>
+    </div><br>
   <% end %>
+
+
+
 
 </div>
 
