@@ -22,44 +22,55 @@
         font-weight: bold;
         text-align: left;
     }
+
+    /* Updated CSS for select elements */
+    select.select-input {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+    }
 </style>
 
 <div class="content">
-  <h1>New Adv</h1>
+  <h1>Нове оголошення</h1>
 
   <%= form_tag advertisements_new_path, multipart: true do %>
     <table>
       <tr>
         <td><%= file_field_tag :file %></td>
-      </tr>
-      <tr>
         <td><b>Назва</b></td>
         <td><input type="text" name="title" placeholder="Назва"></td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Текст</b></td>
         <td><input type="text" name="text" placeholder="Текст"></td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Стан новий</b></td>
         <td><%= check_box_tag :is_new, 'is_new', false %></td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Рік</b></td>
-        <td><input type="number" name="year" placeholder="Рік"></td>
+        <td><input class="styled-input" type="number" name="year" placeholder="Рік"></td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Пробіг</b></td>
-        <td><input type="number" name="miliage" placeholder="Пробіг"></td>
+        <td><input class="styled-input" type="number" name="miliage" placeholder="Пробіг"></td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Ціна</b></td>
-        <td><input type="number" name="count" placeholder="Ціна"></td>
+        <td><input class="styled-input" type="number" name="count" placeholder="Ціна"></td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Валюта</b></td>
         <td>
-          <select name="valute_id">
+          <select name="valute_id" class="select-input">
             <% Valute.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
@@ -67,22 +78,32 @@
         </td>
       </tr>
       <tr>
+        <td></td>
+        <td><b>Країна</b></td>
+        <td>
+          <select name="country_id">
+            <% Country.all.each do |marka| %>
+              <option value=<%= marka.id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
         <td><b>Тип авто</b></td>
         <td>
-          <select name="type_auto_id">
+          <select name="type_auto_id" class="select-input">
             <% TypeAuto.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
           </select>
         </td>
       </tr>
-    </table>
-
-    <table>
       <tr>
+        <td></td>
         <td><b>Марка та модель авто</b></td>
         <td>
-          <select name="model_marka_auto_id">
+          <select name="model_marka_auto_id" class="select-input">
             <% ModelMarkaAuto.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.marka_auto.name + " " + marka.model %></option>
             <% end %>
@@ -90,9 +111,10 @@
         </td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Тип кузова</b></td>
         <td>
-          <select name="type_kuzov_id">
+          <select name="type_kuzov_id" class="select-input">
             <% TypeKuzov.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
@@ -100,9 +122,10 @@
         </td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Тип палива</b></td>
         <td>
-          <select name="type_fuel_id">
+          <select name="type_fuel_id" class="select-input">
             <% TypeFuel.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
@@ -110,22 +133,21 @@
         </td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Тип коробки передач</b></td>
         <td>
-          <select name="type_transmission_id">
+          <select name="type_transmission_id" class="select-input">
             <% TypeTransmission.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
           </select>
         </td>
       </tr>
-    </table>
-
-    <table>
       <tr>
+        <td></td>
         <td><b>Тип приводу</b></td>
         <td>
-          <select name="type_drive_auto_id">
+          <select name="type_drive_auto_id" class="select-input">
             <% TypeDriveAuto.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
@@ -133,22 +155,21 @@
         </td>
       </tr>
       <tr>
+        <td></td>
         <td><b>Колір</b></td>
         <td>
-          <select name="color_id">
+          <select name="color_id" class="select-input">
             <% Color.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
           </select>
         </td>
       </tr>
-    </table>
-
-    <table>
       <tr>
+        <td></td>
         <td><b>Місто</b></td>
         <td>
-          <select name="city_id">
+          <select name="city_id" class="select-input">
             <% City.all.each do |marka| %>
               <option value=<%= marka.id %>><%= marka.name %></option>
             <% end %>
@@ -157,9 +178,10 @@
       </tr>
       <tr>
         <td colspan="2">
-          <%= submit_tag 'Зберегти', class: "content" %>
+
         </td>
       </tr>
     </table>
   <% end %>
+  <%= submit_tag 'Зберегти', class: "content" %>
 </div>

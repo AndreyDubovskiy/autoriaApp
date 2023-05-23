@@ -1,66 +1,167 @@
+<style>
+    .content {
+        display: inline-block;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        font-size: 25px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table td,
+    table th {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    table td:first-child,
+    table th:first-child {
+        font-weight: bold;
+        text-align: left;
+    }
+
+    /* Updated CSS for select elements */
+    select.select-input {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+</style>
 <div class="content">
-<h1>Edit</h1>
+  <h1>Редагування</h1>
 
+  <%= form_tag advertisements_edit_path+"?id="+@tmp.id.to_s do %>
+    <table>
+      <td><%= file_field_tag :file %></td>
+      <tr>
+        <td><b>Назва:</b></td>
+        <td><input type="text" name="title" placeholder="Заголовок" value="<%= @tmp.title %>"></td>
+      </tr>
+      <tr>
+        <td><b>Текст:</b></td>
+        <td><input type="text" name="text" placeholder="Текст" value="<%= @tmp.text %>"></td>
+      </tr>
+      <tr>
+        <td><b>Стан новий:</b></td>
+        <td><%= check_box_tag :is_new, 'is_new', false, checked: @tmp.auto.is_new%></td>
+      </tr>
+      <tr>
+        <td><b>Рік:</b></td>
+        <td><input class="styled-input" type="number" name="year" placeholder="Рік" value=<%= @tmp.auto.year %>></td>
+      </tr>
+      <tr>
+        <td><b>Пробіг(тис. км):</b></td>
+        <td><input class="styled-input" type="number" name="mileage" placeholder="Пробіг" value=<%= @tmp.auto.mileage %>></td>
+      </tr>
+      <tr>
+        <td><b>Ціна:</b></td>
+        <td><input class="styled-input" type="number" name="count" placeholder="Ціна" value="<%= @tmp.price_data.last.price.count %>"></td>
+      </tr>
+      <tr>
+        <td><b>Валюта:</b></td>
+        <td>
+          <select name="valute_id">
+            <% Valute.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.price_data.last.price.valute_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Країна:</b></td>
+        <td>
+          <select name="country_id">
+            <% Country.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.country_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Тип авто:</b></td>
+        <td>
+          <select name="type_auto_id">
+            <% TypeAuto.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_auto_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Марка та модель:</b></td>
+        <td>
+          <select name="model_marka_auto_id">
+            <% ModelMarkaAuto.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.model_marka_auto_id %>><%= marka.marka_auto.name + " " + marka.model %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Тип кузова:</b></td>
+        <td>
+          <select name="type_kuzov_id">
+            <% TypeKuzov.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_kuzov_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Тип палива:</b></td>
+        <td>
+          <select name="type_fuel_id">
+            <% TypeFuel.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_fuel_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Тип трансмісії:</b></td>
+        <td>
+          <select name="type_transmission_id">
+            <% TypeTransmission.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_transmission_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Тип приводу:</b></td>
+        <td>
+          <select name="type_drive_auto_id">
+            <% TypeDriveAuto.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_drive_auto_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Колір:</b></td>
+        <td>
+          <select name="color_id">
+            <% Color.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.color_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Місто:</b></td>
+        <td>
+          <select name="city_id">
+            <% City.all.each do |marka| %>
+              <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.city_id %>><%= marka.name %></option>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+    </table>
 
-    <%= form_tag advertisements_edit_path+"?id="+@tmp.id.to_s do %>
-        <input type="text" name="title" placeholder="title" value="<%= @tmp.title %>"><br>
-        <input type="text" name="text" placeholder="text" value="<%= @tmp.text %>"><br>
-        <%= check_box_tag :is_new, 'is_new', false, checked: @tmp.auto.is_new%><br>
-        <input type="number" name="year" placeholder="year" value=<%= @tmp.auto.year %>><br>
-        <input type="number" name="mileage" placeholder="mileage" value=<%= @tmp.auto.mileage %>><br>
-        <select name="type_auto_id">
-          <% TypeAuto.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_auto_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <select name="model_marka_auto_id">
-          <% ModelMarkaAuto.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.model_marka_auto_id %>><%= marka.marka_auto.name+" "+marka.model %></option>
-          <% end %>
-        </select>
-        <select name="type_kuzov_id">
-          <% TypeKuzov.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_kuzov_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <select name="country_id">
-          <% Country.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.country_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <select name="color_id">
-          <% Color.all.each do |marka| %>
-            <option value=<%= marka.id %>  <%= 'selected' if marka.id == @tmp.auto.color_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <select name="type_fuel_id">
-          <% TypeFuel.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_fuel_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <select name="type_transmission_id">
-          <% TypeTransmission.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.auto.type_transmission_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <select name="type_drive_auto_id">
-          <% TypeDriveAuto.all.each do |marka| %>
-            <option value=<%= marka.id %>  <%= 'selected' if marka.id == @tmp.auto.type_drive_auto_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <select name="valute_id">
-          <% Valute.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.price_data.last.price.valute_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <input type="number" name="count" placeholder="miliage" value="<%= @tmp.price_data.last.price.count %>"><br>
-        <%= file_field_tag :file %>
-        <select name="city_id">
-          <% City.all.each do |marka| %>
-            <option value=<%= marka.id %> <%= 'selected' if marka.id == @tmp.city_id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <%= submit_tag 'Зберегти', class: "content"%>
-    <% end %>
-
+    <%= submit_tag 'Зберегти', class: "content"%>
+  <% end %>
 </div>

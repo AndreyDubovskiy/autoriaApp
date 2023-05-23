@@ -1,5 +1,33 @@
-<div class="content">
+<style>
+    .content {
+        display: inline-block;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+    }
 
+    .cool-table {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+
+    .cool-block {
+        border: 1px solid black;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .cool-block img {
+        width: 100%; /* Установите желаемую ширину */
+        height: 200px; /* Установите желаемую высоту */
+        object-fit: cover;
+    }
+    .price {
+        font-size: 23px; /* Измените размер по вашему усмотрению */
+    }
+</style>
+
+<div class="content">
   <h1>Поиск</h1>
   <form>
     <div class="search-wrapper">
@@ -15,17 +43,14 @@
           searchInput.value = '';
       }
   </script>
-  <% @advs.each do |adv| %>
-    <div class="cool-block">
-      <%= image_tag adv.photos.first.file %><br>
-      <a href="<%= advertisements_show_path+"?id="+adv.id.to_s %>"><%= adv.title %></a><br>
-      <p><%= adv.price_data.last.price.count.to_s + " " + adv.price_data.last.price.valute.name %> </p>
-    </div><br>
-  <% end %>
 
-
-
-
+  <div class="cool-table">
+    <% @advs.each do |adv| %>
+      <div class="cool-block">
+        <%= image_tag adv.photos.first.file %><br>
+        <a class="link" href="<%= advertisements_show_path+"?id="+adv.id.to_s %>"><%= adv.title %> </a><br>
+        <p class="price"><%= adv.price_data.last.price.count.to_s + " " + adv.price_data.last.price.valute.name %> </p>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-
