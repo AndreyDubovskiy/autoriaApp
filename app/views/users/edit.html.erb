@@ -1,18 +1,22 @@
 <div class="content">
-<h1>Edit</h1>
+  <h1>Редагувати</h1>
 
-
-    <%= form_tag users_edit_path+"?id="+@tmp.id.to_s do %>
-        <input type="text" name="name" placeholder="title" value="<%= @tmp.name %>"><br>
-        <input type="text" name="surname" placeholder="text" value="<%= @tmp.surname %>"><br>
-        <input type="text" name="pobatkovi" placeholder="text" value="<%= @tmp.pobatkovi %>"><br>
-        <input type="text" name="phone" placeholder="text" value="<%= @tmp.phone %>"><br>
-        <select name="city_id">
-          <% City.all.each do |marka| %>
-            <option value=<%= marka.id %>><%= marka.name %></option>
-          <% end %>
-        </select>
-        <%= submit_tag 'Зберегти', class: "content"%>
-    <% end %>
-
+  <%= form_tag users_edit_path + "?id=" + @tmp.id.to_s do %>
+    <p><b>Ім'я:</b></p>
+    <input type="text" name="name" placeholder="Введіть ім'я" value="<%= @tmp.name %>"><br>
+    <p><b>Прізвище:</b></p>
+    <input type="text" name="surname" placeholder="Введіть прізвище" value="<%= @tmp.surname %>"><br>
+    <p><b>По батькові:</b></p>
+    <input type="text" name="pobatkovi" placeholder="Введіть по батькові" value="<%= @tmp.pobatkovi %> "><br>
+    <p><b>Номер телефону:</b></p>
+    <input type="text" name="phone" placeholder="Введіть номер телефону" value="<%= @tmp.phone %>"><br>
+    <p><b>Місто:</b></p>
+    <select name="city_id">
+      <% City.all.each do |marka| %>
+        <option value=<%= marka.id %>><%= marka.name %></option>
+      <% end %>
+    </select>
+    <br>
+    <%= submit_tag 'Зберегти', class: "content"%>
+  <% end %>
 </div>

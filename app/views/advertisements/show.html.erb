@@ -1,23 +1,95 @@
-<%= image_tag @tmp.photos.first.file %><br>
-<h1><%= @tmp.title %></h1><br>
-<p>Ціна: <%= @tmp.price_data.last.price.count %></p><p><%= @tmp.price_data.last.price.valute.name %></p><br>
-<p>Місто: <%= @tmp.city.name %></p><br>
-<p>Марка: <%= @tmp.auto.model_marka_auto.marka_auto.name %></p><br>
-<p>Модель: <%= @tmp.auto.model_marka_auto.model %></p><br>
-<p>Нове: <%= @tmp.auto.is_new %></p><br>
-<p>Тип авто: <%= @tmp.auto.type_auto.name %></p><br>
-<p>Рік випуску: <%= @tmp.auto.year %></p><br>
-<p>Кузов: <%= @tmp.auto.type_kuzov.name %></p><br>
-<p>Країна виробник: <%= @tmp.auto.country.name %></p><br>
-<p>Колір: <%= @tmp.auto.color.name %></p><br>
-<p>Тип палива: <%= @tmp.auto.type_fuel.name %></p><br>
-<p>Коробка передач: <%= @tmp.auto.type_transmission.name %></p><br>
-<p>Привід: <%= @tmp.auto.type_drive_auto.name %></p><br>
-<p>Пробіг: <%= @tmp.auto.mileage %></p><br>
+<div class="content">
+  <%= image_tag @tmp.photos.first.file %><br>
+  <h1><%= @tmp.title %></h1><br>
+  <table>
+    <tr>
+      <td><b>Ціна:</b></td>
+      <td><%= @tmp.price_data.last.price.count %> <%= @tmp.price_data.last.price.valute.name %></td>
+    </tr>
+    <tr>
+      <td><b>Місто:</b></td>
+      <td><%= @tmp.city.name %></td>
+    </tr>
+    <tr>
+      <td><b>Марка:</b></td>
+      <td><%= @tmp.auto.model_marka_auto.marka_auto.name %></td>
+    </tr>
+    <tr>
+      <td><b>Модель:</b></td>
+      <td><%= @tmp.auto.model_marka_auto.model %></td>
+    </tr>
+    <tr>
+      <td><b>Нове:</b></td>
+      <td><%= @tmp.auto.is_new %></td>
+    </tr>
+    <tr>
+      <td><b>Тип авто:</b></td>
+      <td><%= @tmp.auto.type_auto.name %></td>
+    </tr>
+    <tr>
+      <td><b>Рік випуску:</b></td>
+      <td><%= @tmp.auto.year %></td>
+    </tr>
+    <tr>
+      <td><b>Кузов:</b></td>
+      <td><%= @tmp.auto.type_kuzov.name %></td>
+    </tr>
+    <tr>
+      <td><b>Країна виробник:</b></td>
+      <td><%= @tmp.auto.country.name %></td>
+    </tr>
+    <tr>
+      <td><b>Колір:</b></td>
+      <td><%= @tmp.auto.color.name %></td>
+    </tr>
+    <tr>
+      <td><b>Тип палива:</b></td>
+      <td><%= @tmp.auto.type_fuel.name %></td>
+    </tr>
+    <tr>
+      <td><b>Коробка передач:</b></td>
+      <td><%= @tmp.auto.type_transmission.name %></td>
+    </tr>
+    <tr>
+      <td><b>Привід:</b></td>
+      <td><%= @tmp.auto.type_drive_auto.name %></td>
+    </tr>
+    <tr>
+      <td><b>Пробіг(тис. км):</b></td>
+      <td><%= @tmp.auto.mileage %> </td>
+    </tr>
+  </table>
+  <br>
 
+  <p><b>Текст об'яви:</b></p>
+  <p><%= @tmp.text %></p><br>
+  <p><b>Продавець:</b></p>
+  <p><%= @tmp.user.surname + " " + @tmp.user.name + " " + @tmp.user.pobatkovi %></p><br>
+  <p><b>Телефон:</b></p>
+  <p><%= @tmp.user.phone %></p><br>
+  <a class="link" href="<%= advertisements_edit_path(id: @tmp.id) %>">Змінити</a><br>
+</div>
 
-<p>Текст об'яви: <%= @tmp.text %></p><br>
+<style>
+    .content {
+        display: inline-block;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        font-size: 25px;
+    }
 
-<p>Продавець: <%= @tmp.user.surname + " " + @tmp.user.name + " " + @tmp.user.pobatkovi %></p><br>
-<p>Телефон: <%= @tmp.user.phone %></p><br>
-<a href="<%= advertisements_edit_path(id: @tmp.id) %>">Змінити</a><br>
+    table {
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table td, table th {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    table td:first-child, table th:first-child {
+        font-weight: bold;
+        text-align: left;
+    }
+</style>

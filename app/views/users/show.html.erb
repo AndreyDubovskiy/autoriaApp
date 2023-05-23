@@ -1,6 +1,43 @@
-<p><%= @tmp.name %></p><br>
-<p><%= @tmp.surname %></p><br>
-<p><%= @tmp.pobatkovi %></p><br>
-<p><%= @tmp.phone %></p><br>
-<p><%= @tmp.city.name %></p><br>
-<%= link_to "Змінити", users_edit_path(id: @tmp.id) %>
+<style>
+    .content {
+        display: inline-block;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        font-size: 25px;
+    }
+    table {
+        border-collapse: collapse;
+    }
+    table td, table th {
+        border: none;
+        padding: 5px;
+    }
+</style>
+<div class="content">
+  <h1>Мій аккаунт </h1>
+
+  <table>
+    <tr>
+      <td><b>Ім'я:</b></td>
+      <td><%= @tmp.name %></td>
+    </tr>
+    <tr>
+      <td><b>Прізвище:</b></td>
+      <td><%= @tmp.surname %></td>
+    </tr>
+    <tr>
+      <td><b>По батькові:</b></td>
+      <td><%= @tmp.pobatkovi %></td>
+    </tr>
+    <tr>
+      <td><b>Телефон:</b></td>
+      <td><%= @tmp.phone %></td>
+    </tr>
+    <tr>
+      <td><b>Місто:</b></td>
+      <td><%= @tmp.city.name %></td>
+    </tr>
+  </table>
+  <br>
+  <%= link_to "Змінити", users_edit_path(id: @tmp.id), class: "link"%>
+</div>

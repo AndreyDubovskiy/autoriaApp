@@ -111,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_205736) do
   end
 
   create_table "photos", charset: "cp1251", force: :cascade do |t|
+    t.string "name"
     t.bigint "advertisement_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
