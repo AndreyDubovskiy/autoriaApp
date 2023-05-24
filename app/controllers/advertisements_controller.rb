@@ -1,6 +1,6 @@
 class AdvertisementsController < ApplicationController
   #GET
-  #before_action :authenticate_user_login!
+  before_action :authenticate_user_login!
 
   def statistic1
     @statistics = ActiveRecord::Base.connection.execute("
