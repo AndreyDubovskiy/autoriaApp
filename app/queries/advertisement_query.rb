@@ -17,6 +17,8 @@ class AdvertisementQuery
     scoped = search_type_transmission_id(scoped, params[:type_transmission_id])
     scoped = search_type_drive_auto_id(scoped, params[:type_drive_auto_id])
     scoped = search_valute_id(scoped, params[:valute_id])
+    scoped = search_year(scoped, params[:year])
+    scoped = search_price_range(scoped, params[:min_price], params[:max_price])
     if(params[:sort_price] == 'up')
       scoped = sort_by_price(scoped, :desc)
     elsif (params[:sort_price] == 'down')
@@ -30,9 +32,15 @@ class AdvertisementQuery
     scoped
   end
 
+  private def search_year(scoped, query = nil)
+    (query and query != "") ? scoped.where("year = #{query}") : scoped
+  end
+
   private def sort_by_title(scoped, sort_direction = :asc)
     scoped.order("title #{sort_direction}")
   end
+
+
   private def sort_by_price(scoped, sort_direction = :asc)
     scoped.joins(price_data: { price: :valute })
           .order(Arel.sql("prices.count * valutes.rate #{sort_direction}"))
@@ -86,6 +94,21 @@ class AdvertisementQuery
 
   private def where_autos_by_type(scoped, where_type = nil, value = nil)
     (where_type and value) ? scoped.joins(:auto).where(autos: { where_type: value }) : scoped
+  end
+
+  private def search_price_range(scoped, min_price = nil, max_price = nil)
+    if min_price.present? and max_price.present? and min_price
+      scoped.joins(price_data: { price: :valute })
+            .where("prices.count BETWEEN ? AND ?", min_price.to_f, max_price.to_f)
+    elsif min_price.present?
+      scoped.joins(price_data: { price: :valute })
+            .where("prices.count >= ?", min_price.to_f)
+    elsif max_price.present?
+      scoped.joins(price_data: { price: :valute })
+            .where("prices.count <= ?", max_price.to_f)
+    else
+      scoped
+    end
   end
 
 end
