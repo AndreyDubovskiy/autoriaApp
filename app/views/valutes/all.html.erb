@@ -14,6 +14,7 @@
     <tr>
       <td><%= valute.id %></td>
       <td><%= valute.name %></td>
+      <td><%= valute.rate %></td>
       <td><%= link_to 'Редагувати', valutes_edit_path+"?id="+valute.id.to_s, class: "link2" %></td>
       <td><%= link_to 'Видалити',valutes_delete_path+"?id="+valute.id.to_s, method: :delete, data: { turbo_method: "delete" }, class: "link2" %></td>
     </tr>

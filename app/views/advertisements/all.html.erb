@@ -1,3 +1,4 @@
+
 <style>
     .content {
         display: inline-block;
@@ -18,7 +19,7 @@
     }
 
     .cool-block img {
-        width: 100%; /* Установите желаемую ширину */
+        width: 400px; /* Установите желаемую ширину */
         height: 200px; /* Установите желаемую высоту */
         object-fit: cover;
     }
@@ -26,31 +27,107 @@
         font-size: 23px; /* Измените размер по вашему усмотрению */
     }
 </style>
-
 <div class="content">
-  <h1>Поиск</h1>
-  <form>
+  <h1>Пошук</h1>
+  <%= form_tag advertisements_path, method: :get do %>
     <div class="search-wrapper">
-      <input type="text" name="search" placeholder="Введите запрос">
-      <span class="clear-input" onclick="clearSearchInput()">&times;</span>
+      <%= text_field_tag :title, params[:title], placeholder: "Введите запрос" %>
     </div>
-    <button type="submit">Знайти</button>
-  </form>
+    <div id="advanced-search" style="display: none;">
+      <select name="city_id" class="select-input">
+        <option value="">Виберіть місто</option>
+        <% City.all.each do |marka| %>
+          <option value="<%= marka.id %>"><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="model_marka_auto_id" class="select-input">
+        <option value="">Виберіть модель та марку</option>
+        <% ModelMarkaAuto.eager_load(:marka_auto).all.each do |marka| %>
+          <option value="<%= marka.id %>"><%= marka.marka_auto.name + " " + marka.model %></option>
+        <% end %>
+      </select>
+      <select name="color_id" class="select-input">
+        <option value="">Виберіть колір</option>
+        <% Color.all.each do |marka| %>
+          <option value="<%= marka.id %>"><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="country_id">
+        <option value="">Виберіть країну виробника</option>
+        <% Country.all.each do |marka| %>
+          <option value=<%= marka.id %>><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="type_auto_id" class="select-input">
+        <option value="">Виберіть тип авто</option>
+        <% TypeAuto.all.each do |marka| %>
+          <option value=<%= marka.id %>><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="type_kuzov_id" class="select-input">
+        <option value="">Виберіть тип кузова</option>
+        <% TypeKuzov.all.each do |marka| %>
+          <option value=<%= marka.id %>><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="type_fuel_id" class="select-input">
+        <option value="">Виберіть тип палива</option>
+        <% TypeFuel.all.each do |marka| %>
+          <option value=<%= marka.id %>><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="type_transmission_id" class="select-input">
+        <option value="">Виберіть тип коробки передач</option>
+        <% TypeTransmission.all.each do |marka| %>
+          <option value=<%= marka.id %>><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="type_drive_auto_id" class="select-input">
+        <option value="">Виберіть тип приводу</option>
+        <% TypeDriveAuto.all.each do |marka| %>
+          <option value=<%= marka.id %>><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="valute_id" class="select-input">
+        <option value="">Виберіть валюту</option>
+        <% Valute.all.each do |marka| %>
+          <option value=<%= marka.id %>><%= marka.name %></option>
+        <% end %>
+      </select>
+      <select name="sort_price" class="select-input">
+        <option value="">Виберіть спосіб сортування</option>
+        <option value="up">Від найдорожчих</option>
+        <option value="down">Від дешевших</option>
+      </select>
+    </div>
+    <%= submit_tag 'Знайти' %>
+  <% end %>
+
+  <button onclick="toggleAdvancedSearch()">Розширений пошук</button>
 
   <script>
-      function clearSearchInput() {
-          var searchInput = document.querySelector('input[name="search"]');
-          searchInput.value = '';
+      function toggleAdvancedSearch() {
+          var advancedSearch = document.getElementById('advanced-search');
+          if (advancedSearch.style.display === 'none') {
+              advancedSearch.style.display = 'block';
+          } else {
+              advancedSearch.style.display = 'none';
+          }
       }
   </script>
+</div>
 
-  <div class="cool-table">
-    <% @advs.each do |adv| %>
-      <div class="cool-block">
-        <%= image_tag adv.photos.first.file %><br>
-        <a class="link" href="<%= advertisements_show_path+"?id="+adv.id.to_s %>"><%= adv.title %> </a><br>
-        <p class="price"><%= adv.price_data.last.price.count.to_s + " " + adv.price_data.last.price.valute.name %> </p>
-      </div>
-    <% end %>
-  </div>
+<div class="cool-table">
+  <% @advs.each do |adv| %>
+    <div class="cool-block">
+      <%= image_tag adv.photos.first.file %><br>
+      <a class="link" href="<%= advertisements_show_path(id: adv.id) %>"><%= adv.title %> </a><br>
+      <% if adv.price_data.size < 2 %>
+        <p class="price"><%= adv.price_data.sort_by(&:created_at).last.price.count.to_s + " " + adv.price_data.sort_by(&:created_at).last.price.valute.name %> </p>
+      <% else %>
+        <p class="price"><s><%= adv.price_data.sort_by(&:created_at)[-2].price.count.to_s + " " + adv.price_data.sort_by(&:created_at)[-2].price.valute.name %> </s></p>
+        <p class="price"><%= adv.price_data.sort_by(&:created_at).last.price.count.to_s + " " + adv.price_data.sort_by(&:created_at).last.price.valute.name %> </p>
+      <% end %>
+    </div>
+  <% end %>
 </div>

@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   # AdvertisementsController
   get '/advertisements', to: 'advertisements#allAdvertisements'
+  get '/advertisements/stat1', to: 'advertisements#statistic1'
+  get '/advertisements/stat2', to: 'advertisements#statistic2'
+  get '/advertisements/stat3', to: 'advertisements#statistic3'
   get '/advertisements/show', to: 'advertisements#show'
   get '/advertisements/new', to: 'advertisements#createPage'
   post '/advertisements/new', to: 'advertisements#create'
@@ -124,5 +127,5 @@ Rails.application.routes.draw do
   post '/valutes/edit', to: 'valutes#edit'
   delete '/valutes/delete', to: 'valutes#delete'
 
-  get '/', to: 'pages#my_page'
+  get '/', to: 'advertisements#allAdvertisements'
 end

@@ -6,25 +6,78 @@ class AdvertisementQuery
   end
 
   def call(params)
-    scoped = search(initial_scope, params[:title])
-    if (params[:commit] == "SearchUp")
-      scoped = sort(scoped, :name)
-    elsif (params[:commit] == "SearchDown")
-      scoped = sort(scoped, :name, :desc)
-    elsif (params[:commit] == "Up2")
-      scoped = sort_by_otdelenies(scoped).reverse
-    elsif (params[:commit] == "Down2")
-      scoped = sort_by_otdelenies(scoped)
-    elsif (params[:commit] == "Up3")
-      scoped = sort_by_doctors(scoped).reverse
-    elsif (params[:commit] == "Down3")
-      scoped = sort_by_doctors(scoped)
+    scoped = search_title(initial_scope, params[:title])
+    scoped = search_city_id(scoped, params[:city_id])
+    scoped = search_color_id(scoped, params[:color_id])
+    scoped = search_model_marka_auto_id(scoped, params[:model_marka_auto_id])
+    scoped = search_color_id(scoped, params[:country_id])
+    scoped = search_type_auto_id(scoped, params[:type_auto_id])
+    scoped = search_type_kuzov_id(scoped, params[:type_kuzov_id])
+    scoped = search_type_fuel_id(scoped, params[:type_fuel_id])
+    scoped = search_type_transmission_id(scoped, params[:type_transmission_id])
+    scoped = search_type_drive_auto_id(scoped, params[:type_drive_auto_id])
+    scoped = search_valute_id(scoped, params[:valute_id])
+    if(params[:sort_price] == 'up')
+      scoped = sort_by_price(scoped, :desc)
+    elsif (params[:sort_price] == 'down')
+      scoped = sort_by_price(scoped, :asc)
+    else
+      scoped = sort_by_title(scoped)
     end
+
+
+
     scoped
   end
 
-  private def search(scoped, query = nil)
-    query ? scoped.where("title LIKE '%#{query}%'") : scoped
+  private def sort_by_title(scoped, sort_direction = :asc)
+    scoped.order("title #{sort_direction}")
+  end
+  private def sort_by_price(scoped, sort_direction = :asc)
+    scoped.joins(price_data: { price: :valute })
+          .order(Arel.sql("prices.count * valutes.rate #{sort_direction}"))
+  end
+
+  private def search_valute_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(price_data: { price: :valute }).where("valutes.id = #{query}") : scoped
+  end
+
+  private def search_type_drive_auto_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(:auto).where(autos: { type_drive_auto_id: query.to_i }) : scoped
+  end
+
+  private def search_type_transmission_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(:auto).where(autos: { type_transmission_id: query.to_i }) : scoped
+  end
+
+  private def search_type_fuel_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(:auto).where(autos: { type_fuel_id: query.to_i }) : scoped
+  end
+  private def search_type_kuzov_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(:auto).where(autos: { type_kuzov_id: query.to_i }) : scoped
+  end
+
+  private def search_type_auto_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(:auto).where(autos: { type_auto_id: query.to_i }) : scoped
+  end
+
+  private def search_title(scoped, query = nil)
+    (query and query != "") ? scoped.where("title LIKE '%#{query}%'") : scoped
+  end
+
+  private def search_city_id(scoped, query = nil)
+    (query and query != "") ? scoped.where("cities.id = #{query}") : scoped
+  end
+
+  private def search_country_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(auto: :country).where(countries: { id: query.to_i }) : scoped
+  end
+  private def search_color_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(:auto).where(autos: { color_id: query.to_i }) : scoped
+  end
+
+  private def search_model_marka_auto_id(scoped, query = nil)
+    (query and query != "") ? scoped.joins(:auto).where(autos: { model_marka_auto_id: query.to_i }) : scoped
   end
 
   private def sort(scoped, sort_type = :name, sort_direction = :asc)

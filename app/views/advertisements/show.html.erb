@@ -67,7 +67,10 @@
   <p><%= @tmp.user.surname + " " + @tmp.user.name + " " + @tmp.user.pobatkovi %></p><br>
   <p><b>Телефон:</b></p>
   <p><%= @tmp.user.phone %></p><br>
-  <a class="link" href="<%= advertisements_edit_path(id: @tmp.id) %>">Змінити</a><br>
+  <% if @current_user.id == @tmp.user.id or current_user_login.admin %>
+    <%= link_to 'Змінити',advertisements_edit_path(id: @tmp.id), class: "link" %>
+    <%= link_to 'Видалити',advertisements_delete_path(id: @tmp.id), method: :delete, data: { turbo_method: "delete" }, class: "link" %>
+  <% end %>
 </div>
 
 <style>

@@ -4,6 +4,7 @@
 
     <%= form_tag valutes_edit_path+"?id="+@tmp.id.to_s do %>
         <input type="text" name="name" placeholder="Назва" value="<%= @tmp.name %>">
+        <input type="number" name="rate" step="any" placeholder="Курс" value="<%= @tmp.rate %>">
         <%= submit_tag 'Зберегти', class: "content"%>
     <% end %>
 

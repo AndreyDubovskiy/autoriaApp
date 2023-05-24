@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_action :authenticate_user_login!
   def show
     @tmp = nil
     if params.has_key? 'id'

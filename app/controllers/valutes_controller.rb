@@ -21,6 +21,7 @@ class ValutesController < ApplicationController
   def create
     @new = Valute.new()
     @new.name = params[:name]
+    @new.rate = params[:rate].to_f
     @new.save
     redirect_to valutes_path
   end
@@ -36,6 +37,7 @@ class ValutesController < ApplicationController
     @tmp = Valute.find(params[:id])
     if @tmp
       @tmp.name = params[:name]
+      @tmp.rate = params[:rate].to_f
       @tmp.save
     end
     redirect_to valutes_path

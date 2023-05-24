@@ -10,12 +10,16 @@
     <%= javascript_importmap_tags %>
     <div class="header">
       <a href="/">Головна</a>
-      <a href="<%= advertisements_path %>">Об'яви</a>
-      <a href="<%= advertisements_new_path %>">newОб'явa</a>
+      <a href="<%= advertisements_new_path %>">Створити оголошення</a>
       <%= link_to 'Вийти', destroy_user_login_session_path, method: :delete, data: { turbo_method: "delete" }, class: "link2" %>
-      <a href= "<%= "#" %>">Увійти</a>
       <a href="<%= users_show_path %>">Мій акаунт</a>
     </div>
+    <div class="header">
+      <a href="<%= advertisements_stat1_path %>">Статистика по кількості оголошень</a>
+      <a href="<%= advertisements_stat2_path %>">Статистика по ціні дорогих оголошень</a>
+      <a href="<%= advertisements_stat3_path %>">Статистика по ціні дешевих оголошень</a>
+    </div>
+    <% if user_login_signed_in? and current_user_login.admin %>
     <div class="header">
       <a href= "<%=statuses_path %>">all statuses</a>
       <a href= "<%=cities_path %>">all cities</a>
@@ -30,6 +34,8 @@
       <a href= "<%=type_transmissions_path %>">all type_transmissions</a>
       <a href= "<%=valutes_path %>">all valutes</a>
     </div>
+    <% end %>
+    <hr>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
