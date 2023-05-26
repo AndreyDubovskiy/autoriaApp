@@ -134,3 +134,4 @@
     </div>
   <% end %>
 </div>
+<%= paginate @advs, params: { title: params[:title], city_id: params[:city_id], color_id: params[:color_id], model_marka_auto_id: params[:model_marka_auto_id], country_id: params[:country_id], type_kuzov_id: params[:type_kuzov_id], type_fuel_id: params[:type_fuel_id], type_transmission_id: params[:type_transmission_id], type_drive_auto_id: params[:type_drive_auto_id], valute_id: params[:valute_id], year: params[:year] , min_price: params[:min_price], max_price: params[:max_price], sort_price: params[:sort_price]   } %>

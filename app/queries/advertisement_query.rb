@@ -26,9 +26,6 @@ class AdvertisementQuery
     else
       scoped = sort_by_title(scoped)
     end
-
-
-
     scoped
   end
 

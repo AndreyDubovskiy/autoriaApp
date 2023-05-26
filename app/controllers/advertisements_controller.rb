@@ -1,4 +1,7 @@
+require 'kaminari'
+
 class AdvertisementsController < ApplicationController
+
   #GET
   before_action :authenticate_user_login!
 
@@ -15,51 +18,61 @@ class AdvertisementsController < ApplicationController
 
   def statistic2
     @statistics = ActiveRecord::Base.connection.execute("
-      SELECT DISTINCT cities.name AS city_name, advertisements.title AS advertisement_title, prices.count AS price_count, valutes.name AS valute_name, (prices.count * valutes.rate) AS price_total
-      FROM advertisements
-      JOIN cities ON cities.id = advertisements.city_id
-      JOIN (
-        SELECT advertisement_id, MAX(prices.count * valutes.rate) AS max_price
-        FROM price_data
+      SELECT subquery.city_name, MAX(subquery.advertisement_title) AS advertisement_title, subquery.price_count, MAX(subquery.valute_name) AS valute_name, MAX(subquery.price_total) AS price_total
+      FROM (
+        SELECT cities.name AS city_name, advertisements.title AS advertisement_title, prices.count AS price_count, valutes.name AS valute_name, (prices.count * valutes.rate) AS price_total
+        FROM advertisements
+        JOIN cities ON cities.id = advertisements.city_id
+        JOIN (
+          SELECT city_id, MAX(prices.count * valutes.rate) AS max_price
+          FROM advertisements
+          JOIN price_data ON price_data.advertisement_id = advertisements.id
+          JOIN prices ON prices.price_datum_id = price_data.id
+          JOIN valutes ON valutes.id = prices.valute_id
+          GROUP BY city_id
+        ) AS max_prices ON max_prices.city_id = cities.id
+        JOIN price_data ON price_data.advertisement_id = advertisements.id
         JOIN prices ON prices.price_datum_id = price_data.id
         JOIN valutes ON valutes.id = prices.valute_id
-        GROUP BY advertisement_id
-      ) AS max_prices ON max_prices.advertisement_id = advertisements.id
-      JOIN price_data ON price_data.advertisement_id = advertisements.id
-      JOIN prices ON prices.price_datum_id = price_data.id
-      JOIN valutes ON valutes.id = prices.valute_id
-      WHERE (prices.count * valutes.rate) = max_prices.max_price
-      ORDER BY price_total DESC
+        WHERE (prices.count * valutes.rate) = max_prices.max_price
+        ORDER BY city_name
+      ) AS subquery
+      GROUP BY subquery.city_name, subquery.price_count
+      ORDER BY price_total DESC;
     ")
     render 'stat2'
   end
   def statistic3
     @statistics = ActiveRecord::Base.connection.execute("
-      SELECT DISTINCT cities.name AS city_name, advertisements.title AS advertisement_title, prices.count AS price_count, valutes.name AS valute_name, (prices.count * valutes.rate) AS price_total
-      FROM advertisements
-      JOIN cities ON cities.id = advertisements.city_id
-      JOIN (
-        SELECT advertisement_id, MAX(prices.count * valutes.rate) AS max_price
-        FROM price_data
+      SELECT subquery.city_name, MAX(subquery.advertisement_title) AS advertisement_title, subquery.price_count, MAX(subquery.valute_name) AS valute_name, MAX(subquery.price_total) AS price_total
+      FROM (
+        SELECT cities.name AS city_name, advertisements.title AS advertisement_title, prices.count AS price_count, valutes.name AS valute_name, (prices.count * valutes.rate) AS price_total
+        FROM advertisements
+        JOIN cities ON cities.id = advertisements.city_id
+        JOIN (
+          SELECT city_id, MAX(prices.count * valutes.rate) AS max_price
+          FROM advertisements
+          JOIN price_data ON price_data.advertisement_id = advertisements.id
+          JOIN prices ON prices.price_datum_id = price_data.id
+          JOIN valutes ON valutes.id = prices.valute_id
+          GROUP BY city_id
+        ) AS max_prices ON max_prices.city_id = cities.id
+        JOIN price_data ON price_data.advertisement_id = advertisements.id
         JOIN prices ON prices.price_datum_id = price_data.id
         JOIN valutes ON valutes.id = prices.valute_id
-        GROUP BY advertisement_id
-      ) AS max_prices ON max_prices.advertisement_id = advertisements.id
-      JOIN price_data ON price_data.advertisement_id = advertisements.id
-      JOIN prices ON prices.price_datum_id = price_data.id
-      JOIN valutes ON valutes.id = prices.valute_id
-      WHERE (prices.count * valutes.rate) = max_prices.max_price
-      ORDER BY price_total ASC
+        WHERE (prices.count * valutes.rate) = max_prices.max_price
+        ORDER BY city_name
+      ) AS subquery
+      GROUP BY subquery.city_name, subquery.price_count
+      ORDER BY price_total ASC;
     ")
     render 'stat3'
   end
   def allAdvertisements
-    #@advs = AdvertisementQuery.new(Advertisement.all).call(params)
-    #@advs = @advs.page(params[:page]).per(10)
-    @advs = Advertisement.eager_load(:city, :photos, :user, auto: [:type_auto, :model_marka_auto, :type_kuzov, :country, :color, :type_fuel, :type_transmission, :type_drive_auto], price_data: { price: :valute }).all
+    @advs = Advertisement.eager_load(:photos, price_data: { price: :valute }).all
     @advs = AdvertisementQuery.new(@advs).call(params)
+    @advs = Kaminari.paginate_array(@advs).page(params[:page]).per(4)
     render 'all'
-    #<%= paginate @advs %>
   end
 
   def show
@@ -170,7 +183,7 @@ class AdvertisementsController < ApplicationController
 
   #DELETE
   def delete
-    @tmp = Advertisement.eager_load(:city, :photos, :user, auto: [:type_auto, :model_marka_auto, :type_kuzov, :country, :color, :type_fuel, :type_transmission, :type_drive_auto], price_data: { price: :valute }).find(params[:id])
+    @tmp = Advertisement.eager_load(:city, :photos, :user, :auto, price_data: { price: :valute }).find(params[:id])
     if @tmp and (current_user_login.user.id == @tmp.user.id or current_user_login.admin)
       @auto = @tmp.auto
       if @auto
